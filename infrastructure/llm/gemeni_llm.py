@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_core.prompts import ChatPromptTemplate
 import os
-from langchain import hub
 from typing import Any
 
 from core.ports.llm_repository import LLMRepository
@@ -15,7 +15,11 @@ class GeminiLLM(LLMRepository):
             temperature=0.3,
             api_key=os.getenv("GOOGLE_API_KEY"),
         )
-        self.prompt = hub.pull("rlm/rag-prompt") 
+        # Create RAG prompt template directly instead of using hub
+        self.prompt = ChatPromptTemplate.from_messages([
+            ("system", "Use the following pieces of context to answer the question. If you don't know the answer, just say that you don't know, don't try to make up an answer."),
+            ("human", "Context: {context}\n\nQuestion: {question}")
+        ]) 
 
     def invoke(self, messages: str) -> str:
         response: Any = self.model.invoke(messages)

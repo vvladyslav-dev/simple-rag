@@ -12,5 +12,5 @@ RUN pip install --no-cache-dir -U pip \
 # Copy the project (will be overridden by volume mount in docker-compose)
 COPY . /app
 
-CMD ["streamlit", "run", "app/app.py", "--server.address", "0.0.0.0", "--server.port", "8501", "--server.runOnSave", "true"]
+CMD ["streamlit", "run", "app.py", "--server.address", "0.0.0.0", "--server.port", "8501", "--server.runOnSave", "true"]
 

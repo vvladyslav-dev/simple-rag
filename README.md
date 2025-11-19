@@ -27,7 +27,7 @@ GOOGLE_API_KEY=your_google_api_key
 python3.11 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-streamlit run app/app.py
+streamlit run app.py
 ```
 App will be available at `http://localhost:8501`.
 
